@@ -15,7 +15,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="" id="registrationForm">
+                    <form method="POST" action="{{ route('register') }}" id="registrationForm">
                         @csrf
 
                         <div class="form-group row">
@@ -116,19 +116,20 @@
                             </div>
                         </div>
 
-                        {{-- <div class="form-group row">
-                            <label for="country" class="col-md-4 col-form-label text-md-right">{{ __('County') }}</label>
+                        <div class="form-group row">
+                            <label for="county" class="col-md-4 col-form-label text-md-right">{{ __('County') }}</label>
 
                             <div class="col-md-6">
-                                <input id="county" type="text" class="form-control{{ $errors->has('country') ? ' is-invalid' : '' }}" name="country" value="{{ old('country') }}">
+                                <input id="county" type="text" class="form-control{{ $errors->has('county') ? ' is-invalid' : '' }}" name="county" value="{{ old('county') }}">
 
-                                @if ($errors->has('country'))
+                                @if ($errors->has('county'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('country') }}</strong>
+                                        <strong>{{ $errors->first('county') }}</strong>
                                     </span>
                                 @endif
                             </div>
-                        </div> --}}
+                        </div>
+                        
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>

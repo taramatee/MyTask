@@ -59,6 +59,7 @@ class RegisterController extends Controller
             'city' => 'required',
             'state' => 'required',
             'zip' => 'required',
+            'county' => 'required',
         ]);
     }
 
@@ -79,7 +80,7 @@ class RegisterController extends Controller
             'city' => $data['city'],
             'state' => $data['state'],
             'zip' => $data['zip'],
-            // 'country' => $data['country'] ? $data['country'] : 'NA',
+            'county' => $data['county'],
             'password' => Hash::make($data['password']),
         ]);
 

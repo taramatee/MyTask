@@ -14,7 +14,7 @@ class UserRegisterController extends Controller
 {
     public function registerUser(Request $request) {
         // return $request->all();
-        $validator = $validator = Validator::make($request->all(), [
+        $validator =  Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
@@ -29,7 +29,7 @@ class UserRegisterController extends Controller
             return Redirect::back()->withErrors($validator);
         }
 
-        if($validator->fails())
+       
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
