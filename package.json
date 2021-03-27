@@ -18,5 +18,9 @@
         "lodash": "^4.17.5",
         "popper.js": "^1.12",
         "vue": "^2.5.7"
+    },
+    "dependencies": {
+        "smartystreets-api": "^0.2.0",
+        "smartystreets-javascript-sdk": "^1.7.2"
     }
 }

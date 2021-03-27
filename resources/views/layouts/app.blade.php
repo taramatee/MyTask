@@ -38,10 +38,90 @@
                 locality: '#city',
                 administrative_area: '#state',
                 postal_code: '#PropertyZip',
-                country: '#country'
+                // county: '#county'
             }]
         });
     </script>
+
+    {{-- <script src="https://us-street.api.smartystreets.com/street-address?auth-id=46342cd0-7f9f-8f92-1eae-b52ef68be03b&auth-token=8GB3AQRtZjYLxIQCs2c5"></script> --}}
+
+    <script>
+        $(document).ready(function(){
+            $('#registrationForm').submit(function(e){
+                e.preventDefault();
+                console.log('entered')
+                // var county = '';
+                var street = $("#address").val();
+                var city = $("#city").val();
+                var state = $("#state").val();
+                var zipcode = $("#PropertyZip").val();
+                // console.log(street)
+                // console.log(city)
+                // console.log(state)
+                // console.log(zipcode)
+                var county = CallAPI(street, city, state, zipcode);
+                function CallAPI(street1, city1, state1, zip1) {
+                        var request = new XMLHttpRequest();
+                        request.open('POST', encodeURI('https://us-street.api.smartystreets.com/street-address?auth-id=46342cd0-7f9f-8f92-1eae-b52ef68be03b&auth-token=8GB3AQRtZjYLxIQCs2c5'), true);
+                        request.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                        var reqdata = JSON.stringify([{
+                            "street":street1,
+                            "city":city1,
+                            "state":state1,
+                            "zipcode":zip1
+                        }]);
+                        request.onreadystatechange = function() {
+                            if(this.readyState == 4 && this.status == 200) {
+                                var data = JSON.parse(this.response);
+                                var value =  data[0].metadata.county_name;
+                                var name = $('#name').val();
+                                var email = $('#email').val();
+                                var phone = $('#phone').val();
+                                var password = $('#password').val();
+
+                                $.ajaxSetup({
+                                    headers:
+                                        {
+                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                        },
+                                    type:'post',
+                                    url: "{{ route("registerUser") }}",
+                                    data: {
+                                        name: name,
+                                        email: email,
+                                        phone: phone,
+                                        street: street,
+                                        state: state,
+                                        city: city,
+                                        zipcode: zipcode,
+                                        password: password,
+                                        county: value
+                                    } ,
+                                    // async: true,
+                                    // dataType: 'json',
+                                    
+                                });
+                                $.post()
+                                .done(function(response) {
+                                   alert('User Registered');
+                                   window.location.reload();
+                                })
+                                .fail(function() {
+                                    console.log('failed');
+                                })
+                            }
+                        }
+                        request.send(reqdata);
+                }
+               var county = CallAPI(street, city, state, zipcode);
+                console.log(county)
+               
+            });
+        });
+
+       
+    </script>
+
 </head>
 <body>
     <div id="app">

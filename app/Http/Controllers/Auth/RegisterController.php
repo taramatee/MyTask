@@ -70,7 +70,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // return $data;
+        return $data;
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -79,7 +79,7 @@ class RegisterController extends Controller
             'city' => $data['city'],
             'state' => $data['state'],
             'zip' => $data['zip'],
-            'country' => $data['country'] ? $data['country'] : 'NA',
+            // 'country' => $data['country'] ? $data['country'] : 'NA',
             'password' => Hash::make($data['password']),
         ]);
 
@@ -87,4 +87,8 @@ class RegisterController extends Controller
 
         return $user;
     }
+
+    // public function registerUser(Request $request) {
+    //     return $request->all();
+    // }
 }
