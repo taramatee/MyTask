@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Events\NewUserRegistered;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
 class UserRegisterController extends Controller
